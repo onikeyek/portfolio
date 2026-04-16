@@ -237,8 +237,9 @@ body {
   .hero-image { width: 200px; height: 240px; }
   .hero-text h1 { font-size: 2rem; }
   .hero-text h1 .highlight { font-size: 2.4rem; }
-  #navbar { padding: 0 20px; }
-  .nav-links { gap: 16px; }
+  #navbar { padding: 0 16px; }
+  .nav-links { display: none; }
+  .nav-name { font-size: 0.9rem; }
 }
 
 /* ===== Shared ===== */
@@ -480,7 +481,6 @@ img { max-width: 100%; height: auto; display: block; }
   .exp-panels { padding: 0; }
   .section-inner { padding: 0 20px; }
 }
-
 /* ===== Projects Section ===== */
 
 #projects {
