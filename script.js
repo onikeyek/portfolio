@@ -164,7 +164,10 @@ function closeWeatherModal() {
   weatherModal.setAttribute('aria-hidden', 'true');
 }
 
-weatherBtn.addEventListener('click', openWeatherModal);
+weatherBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  openWeatherModal();
+});
 weatherClose.addEventListener('click', closeWeatherModal);
 weatherModal.addEventListener('click', e => {
   if (e.target === weatherModal) closeWeatherModal();
