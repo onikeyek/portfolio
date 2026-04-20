@@ -25,8 +25,36 @@
       <li><a href="https://medium.com/@naimotyekini95" target="_blank" rel="noopener" aria-label="Medium"><i class="fab fa-medium"></i></a></li>
       <li><a href="https://linkedin.com/in/naimot-yekini-46216397" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a></li>
       <li><button id="themeToggle" aria-label="Toggle theme"><i class="fas fa-sun"></i></button></li>
+      <li><button id="weatherBtn" aria-label="Weather"><i class="fas fa-cloud-sun"></i></button></li>
     </ul>
   </nav>
+
+  <!-- Weather Modal -->
+  <div id="weatherModal" class="w-modal-overlay" aria-hidden="true">
+    <div class="w-modal" role="dialog" aria-label="Weather Forecast">
+      <div class="w-modal-header">
+        <div class="w-modal-title">
+          <span>⛅</span>
+          <h2>Weather Forecast</h2>
+        </div>
+        <button class="w-modal-close" id="weatherClose" aria-label="Close">✕</button>
+      </div>
+      <p class="w-modal-sub">Current conditions for selected cities</p>
+      <div class="w-city-list">
+        <button class="w-city-btn active" data-city="Kuopio"   data-lat="62.8924" data-lon="27.6770">KUOPIO</button>
+        <button class="w-city-btn"        data-city="Helsinki" data-lat="60.1699" data-lon="24.9384">HELSINKI</button>
+        <button class="w-city-btn"        data-city="Lagos"    data-lat="6.5244"  data-lon="3.3792">LAGOS</button>
+        <button class="w-city-btn"        data-city="London"   data-lat="51.5074" data-lon="-0.1278">LONDON</button>
+      </div>
+      <div class="w-result" id="wResult">
+        <div class="w-row"><span class="w-label">CITY</span><span class="w-val" id="wCity">--</span></div>
+        <div class="w-row"><span class="w-label">TEMPERATURE</span><span class="w-val" id="wTemp">--</span></div>
+        <div class="w-row"><span class="w-label">WIND SPEED</span><span class="w-val" id="wWind">--</span></div>
+        <div class="w-row"><span class="w-label">CONDITION</span><span class="w-val" id="wCond">--</span></div>
+        <div class="w-row"><span class="w-label">RECORDED AT</span><span class="w-val" id="wTime">--</span></div>
+      </div>
+    </div>
+  </div>
 
   <!-- Home / Hero Section -->
   <section id="home">

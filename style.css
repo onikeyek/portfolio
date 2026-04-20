@@ -826,3 +826,172 @@ body.light .about-brace {
   background-clip: text;
   animation: sparkle 3s linear infinite;
 }
+
+/* ===== Weather Modal ===== */
+
+#weatherBtn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  font-size: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+#weatherBtn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.w-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+.w-modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.w-modal {
+  background: var(--bg-mid);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 400px;
+  margin: 16px;
+  transform: translateY(20px);
+  transition: transform 0.25s;
+}
+
+.w-modal-overlay.open .w-modal {
+  transform: translateY(0);
+}
+
+.w-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.w-modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.w-modal-title h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.w-modal-close {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-mid);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.w-modal-close:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.w-modal-sub {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.w-city-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.w-city-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-mid);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.w-city-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.w-city-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg-dark);
+}
+
+.w-result {
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.w-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.w-row:last-child { border-bottom: none; }
+
+.w-label {
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.w-val {
+  color: var(--text-bright);
+  font-weight: 500;
+}

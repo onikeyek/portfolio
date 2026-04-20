@@ -147,3 +147,72 @@ if (themeToggle) {
     if (themeIcon) themeIcon.className = 'fas fa-moon';
   }
 }
+
+// ===== Weather Modal =====
+const weatherBtn   = document.getElementById('weatherBtn');
+const weatherModal = document.getElementById('weatherModal');
+const weatherClose = document.getElementById('weatherClose');
+
+function openWeatherModal() {
+  weatherModal.classList.add('open');
+  weatherModal.setAttribute('aria-hidden', 'false');
+  fetchWidgetWeather('Kuopio', '62.8924', '27.6770');
+}
+
+function closeWeatherModal() {
+  weatherModal.classList.remove('open');
+  weatherModal.setAttribute('aria-hidden', 'true');
+}
+
+weatherBtn.addEventListener('click', openWeatherModal);
+weatherClose.addEventListener('click', closeWeatherModal);
+weatherModal.addEventListener('click', e => {
+  if (e.target === weatherModal) closeWeatherModal();
+});
+
+document.querySelectorAll('.w-city-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.w-city-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    fetchWidgetWeather(btn.dataset.city, btn.dataset.lat, btn.dataset.lon);
+  });
+});
+
+function weatherIconWidget(code) {
+  if (code === 0)  return '☀️';
+  if (code <= 2)   return '⛅';
+  if (code <= 3)   return '☁️';
+  if (code <= 48)  return '🌫️';
+  if (code <= 67)  return '🌧️';
+  if (code <= 77)  return '❄️';
+  if (code <= 82)  return '🌦️';
+  return '⛈️';
+}
+
+async function fetchWidgetWeather(city, lat, lon) {
+  document.getElementById('wCity').textContent = city;
+  document.getElementById('wTemp').textContent = '...';
+  document.getElementById('wWind').textContent = '...';
+  document.getElementById('wCond').textContent = '...';
+  document.getElementById('wTime').textContent = '...';
+
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+      `&current=temperature_2m,wind_speed_10m,weather_code&timezone=auto`;
+    const res  = await fetch(url);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    const c    = data.current;
+
+    const now = new Date(c.time);
+    const timeStr = now.toISOString().slice(0, 16).replace('T', ' ');
+
+    document.getElementById('wCity').textContent = city;
+    document.getElementById('wTemp').textContent = `${weatherIconWidget(c.weather_code)} ${Math.round(c.temperature_2m)} °C`;
+    document.getElementById('wWind').textContent = `${c.wind_speed_10m} km/h`;
+    document.getElementById('wCond').textContent = weatherIconWidget(c.weather_code);
+    document.getElementById('wTime').textContent = timeStr;
+  } catch (err) {
+    document.getElementById('wTemp').textContent = 'Failed to load';
+  }
+}
